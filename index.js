@@ -55,11 +55,13 @@ async function main() {
         if (!id) {
           throw new Error("Task id is required");
         }
-        const index = data.indexOf(id);
-
+        
+        const index = data.findIndex(task => task.id === id);
+        
         if (index === -1) {
           throw new Error("Task not found");
         }
+
         data.splice(index, 1);
         await fileManager.writeFile(data);
         console.log("Task removed successfully");
